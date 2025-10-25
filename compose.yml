@@ -1,0 +1,25 @@
+services:
+  py-ai:
+    build:
+      context: ./py-ai
+      dockerfile: Dockerfile
+    environment:
+      - BASE_URL=http://model-runner.docker.internal/engines/llama.cpp/v1
+      - MODEL_NAME=ai/gemma3
+    develop:
+      watch:
+        - path: ./py-ai/
+          target: /app/
+          action: sync
+          ignore:
+            - "**/__pycache__/**"
+            - "**/*.pyc"
+            - "**/.venv/**"
+        - path: ./py-ai/pyproject.toml
+          action: restart
+    models:
+      - llm
+
+models:
+  llm:
+    model: ai/gemma3
