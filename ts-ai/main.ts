@@ -7,7 +7,7 @@ import {
 import OpenAI from "openai";
 
 const baseURL = process.env.BASE_URL;
-const modelName = process.env.MODEL_NAAME;
+const modelName = process.env.MODEL_NAME;
 
 if (!baseURL || !modelName) {
   throw new Error(
