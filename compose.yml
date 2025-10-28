@@ -36,6 +36,22 @@ services:
 
     models:
       - llm
+  go-ai:
+    build:
+      context: ./go-ai
+      dockerfile: Dockerfile
+    environment:
+      - BASE_URL=http://model-runner.docker.internal/engines/llama.cpp/v1
+      - MODEL_NAME=ai/gemma3
+    develop:
+      watch:
+        - path: ./go-ai/
+          target: /app/
+          action: sync
+        - path: ./go-ai/go.mod
+          action: restart
+    models:
+      - llm
 
 models:
   llm:
