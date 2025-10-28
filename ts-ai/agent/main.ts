@@ -13,7 +13,7 @@ if (traceProvider) {
 }
 const client = new OpenAI({
   apiKey: "sk-dummy-key", // Dummy key, not used by Ollama
-  baseURL: "http://localhost:12434/engines/llama.cpp/v1",
+  baseURL: "http://model-runner.docker.internal/engines/llama.cpp/v1",
 });
 
 const model = new OpenAIChatCompletionsModel(client, "ai/gemma3"); // Replace with your Ollama model name

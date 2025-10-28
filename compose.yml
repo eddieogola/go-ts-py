@@ -19,6 +19,23 @@ services:
           action: restart
     models:
       - llm
+  ts-ai:
+    build:
+      context: ./ts-ai
+      dockerfile: Dockerfile
+    environment:
+      - BASE_URL=http://model-runner.docker.internal/engines/llama.cpp/v1
+      - MODEL_NAME=ai/gemma3
+    develop:
+      watch:
+        - path: ./ts-ai/
+          target: /app/
+          action: sync
+        - path: ./ts-ai/package.json
+          action: rebuild
+
+    models:
+      - llm
 
 models:
   llm:
