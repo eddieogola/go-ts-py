@@ -2,7 +2,7 @@
 from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled
 from  openai import AsyncOpenAI
 
-from config.settings import settings
+from settings import settings
 
 BASE_URL = settings.base_url
 MODEL_NAME = settings.model_name

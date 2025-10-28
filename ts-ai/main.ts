@@ -6,17 +6,26 @@ import {
 } from "@openai/agents";
 import OpenAI from "openai";
 
+const baseURL = process.env.BASE_URL;
+const modelName = process.env.MODEL_NAAME;
+
+if (!baseURL || !modelName) {
+  throw new Error(
+    "Please set the BASE_URL and MODEL_NAME environment variables."
+  );
+}
+
 const traceProvider = getGlobalTraceProvider();
 
 if (traceProvider) {
   traceProvider.setDisabled(true);
 }
 const client = new OpenAI({
-  apiKey: "sk-dummy-key", // Dummy key, not used by Ollama
-  baseURL: "http://model-runner.docker.internal/engines/llama.cpp/v1",
+  apiKey: "sk-dummy-key",
+  baseURL: baseURL,
 });
 
-const model = new OpenAIChatCompletionsModel(client, "ai/gemma3"); // Replace with your Ollama model name
+const model = new OpenAIChatCompletionsModel(client, modelName);
 
 const agent = new Agent({
   model,
